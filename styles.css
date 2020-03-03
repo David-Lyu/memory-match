@@ -1,0 +1,53 @@
+
+.background-img {
+  align-content: space-between;
+  background-image: url(assets/images/lfz-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.first-row {
+  justify-content: center;
+}
+
+.second-row {
+  justify-content: space-evenly;
+}
+
+aside {
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+aside > div {
+  flex-basis: 60%;
+  background-color: lightblue;
+  margin-bottom: 2%;
+}
+
+div > h4 {
+  text-align: center;
+}
+
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+main > .row {
+  height: 25%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cards {
+  background-image: url(assets/images/lfz-card.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
