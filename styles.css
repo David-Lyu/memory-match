@@ -44,7 +44,7 @@ main > .row {
   justify-content: space-evenly;
 }
 
-.cards {
+.back-card {
   background-image: url(assets/images/lfz-card.jpg);
   background-size: contain;
   background-repeat: no-repeat;
