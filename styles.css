@@ -98,7 +98,18 @@ main > .row {
   background-image: url(assets/images/react-logo.png);
 }
 
-
+.modal {
+  background-color: deeppink;
+  position: fixed;
+  background-position: center;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  height: 100vh;
+  z-index: 1;
+  opacity: 0.8;
+}
 
 
 .hidden {
