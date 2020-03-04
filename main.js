@@ -28,8 +28,6 @@ function handleClick(event){
   }else{
     secondCardClicked = event.target;
     secondCardClasses = secondCardClicked.previousElementSibling.className;
-
-
     gameCards.removeEventListener("click", handleClick);
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
@@ -37,12 +35,10 @@ function handleClick(event){
       if(matches === maxMatches){
         var modal = document.getElementById("modal");
         modal.classList.remove("hidden")
+        gameCards.addEventListener("click", handleClick)
       }
-      gameCards.addEventListener("click",handleClick)
     }else{
       setTimeout(removeHidden,1500)
-
     }
-
   }
 }
