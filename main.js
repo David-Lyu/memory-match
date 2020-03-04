@@ -11,6 +11,8 @@ function removeHidden() {
   firstCardClicked.classList.remove("hidden")
   secondCardClicked.classList.remove("hidden")
   firstCardClicked = null;
+  secondCardClicked = null;
+  gameCards.addEventListener("click", handleClick)
 }
 
 function handleClick(event){
@@ -28,19 +30,11 @@ function handleClick(event){
     secondCardClasses = secondCardClicked.previousElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
     if(firstCardClasses === secondCardClasses){
-      console.log("image matches");
       firstCardClicked = null;
       secondCardClicked = null;
       gameCards.addEventListener("click",handleClick)
     }else{
-      console.log("image does not match");
-      setTimeout(function() {
-        firstCardClicked.classList.remove("hidden")
-        secondCardClicked.classList.remove("hidden")
-        gameCards.addEventListener("click", handleClick)
-        firstCardClicked = null;
-        secondCardClicked = null;
-      },1500)
+      setTimeout(removeHidden,1500)
     }
 
   }
