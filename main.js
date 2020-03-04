@@ -82,3 +82,11 @@ function resetCards(){
     allCards[cardIndex].classList.remove("hidden")
   }
 }
+
+var frontCards = document.querySelectorAll(".front-card");
+for (let i = frontCards.length — 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * i)
+  const temp = frontCards[i]
+  frontCards[i] = frontCards[j]
+  frontCards[j] = temp
+}
