@@ -8,11 +8,11 @@ var secondCardClasses;
 var maxMatches = 9;
 var matches = 0;
 
+
 function removeHidden() {
   firstCardClicked.classList.remove("hidden")
   secondCardClicked.classList.remove("hidden")
   firstCardClicked = null;
-  secondCardClicked = null;
   gameCards.addEventListener("click", handleClick)
 }
 
@@ -29,22 +29,39 @@ function handleClick(event){
   }else{
     secondCardClicked = event.target;
     secondCardClasses = secondCardClicked.previousElementSibling.className;
-
-
     gameCards.removeEventListener("click", handleClick);
+    attempts++;
+    console.log(attempts)
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
-      secondCardClicked = null;
       matches++;
+      gameCards.addEventListener("click", handleClick)
       if(matches === maxMatches){
         var modal = document.getElementById("modal");
         modal.classList.remove("hidden")
+        gameCards.addEventListener("click", handleClick)
       }
-      gameCards.addEventListener("click",handleClick)
     }else{
       setTimeout(removeHidden,1500)
-
     }
-
+    displayStats();
   }
+}
+
+var attempts = 0;
+var gamesPlayed = 0;
+var calculateAccuracy = 0
+
+
+function displayStats(){
+  var gamesPlayedDocument = document.getElementById("gamesPlayed");
+  gamesPlayedDocument.textContent = gamesPlayed;
+
+  var attemptsPlayed = document.getElementById("gamesAttempts");
+  attemptsPlayed.textContent = attempts;
+
+  calculateAccuracy = Math.trunc(100 * matches / attempts);
+  var gamesAccuracy = document.getElementById("gamesAccuracy");
+  return gamesAccuracy.textContent = calculateAccuracy + "%";
+
 }
