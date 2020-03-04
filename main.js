@@ -60,19 +60,18 @@ function displayStats(){
 function calculateAccuracy(attempts,matches){
  if(attempts){
     return Math.trunc(100* matches/attempts)
- }
+ }else{return "0%";}
 }
 modal.addEventListener("click",resetGame)
 
 function resetGame(){
-  attemptsPlayed.textContent = 0;
   gamesAccuracy.textContent = "0%"
-  resetCards();
-  modal.classList.add("hidden")
   matches = 0;
   attempts = 0;
   gamesPlayed++
   gamesPlayedDocument.textContent = gamesPlayed
+  resetCards();
+  modal.classList.add("hidden")
 }
 
 var allCards = document.querySelectorAll(".back-card")
