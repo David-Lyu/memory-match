@@ -60,12 +60,13 @@ function displayStats(){
 function calculateAccuracy(attempts,matches){
  if(attempts){
     return Math.trunc(100* matches/attempts)
- }else{return "0%";}
+ }
 }
 modal.addEventListener("click",resetGame)
 
 function resetGame(){
-  gamesAccuracy.textContent = "0%"
+  gamesAccuracy.textContent = "0%";
+  attemptsPlayed.textContent = "N/A";
   matches = 0;
   attempts = 0;
   gamesPlayed++
