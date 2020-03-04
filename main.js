@@ -1,6 +1,17 @@
+
 var gameCards = document.getElementById("gameCards");
 gameCards.addEventListener("click", handleClick)
+var firstCardClicked;
+var secondCardClicked;
+var firstCardClasses;
+var secondCardClasses;
+var counter = 0;
 
+function removeHidden() {
+  firstCardClicked.classList.remove("hidden")
+  secondCardClicked.classList.remove("hidden")
+  firstCardClicked = null;
+}
 
 function handleClick(event){
   if(event.target.className.indexOf("back-card") === -1){
@@ -11,14 +22,26 @@ function handleClick(event){
 
   if(!firstCardClicked){
     firstCardClicked = event.target;
-    console.log(firstCardClicked);
+    firstCardClasses = firstCardClicked.previousElementSibling.className;
   }else{
     secondCardClicked = event.target;
-    console.log(secondCardClicked);
+    secondCardClasses = secondCardClicked.previousElementSibling.className;
+    gameCards.removeEventListener("click", handleClick);
+    if(firstCardClasses === secondCardClasses){
+      console.log("image matches");
+      firstCardClicked = null;
+      secondCardClicked = null;
+      gameCards.addEventListener("click",handleClick)
+    }else{
+      console.log("image does not match");
+      setTimeout(function() {
+        firstCardClicked.classList.remove("hidden")
+        secondCardClicked.classList.remove("hidden")
+        gameCards.addEventListener("click", handleClick)
+        firstCardClicked = null;
+        secondCardClicked = null;
+      },1500)
+    }
+
   }
 }
-
-var firstCardClicked;
-var secondCardClicked;
-var firstCardClasses;
-var secondCardClasses;
