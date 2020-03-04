@@ -7,6 +7,7 @@ var firstCardClasses;
 var secondCardClasses;
 var maxMatches = 9;
 var matches = 0;
+var modal = document.getElementById("modal");
 
 
 function removeHidden() {
@@ -22,7 +23,6 @@ function handleClick(event){
   }
   var clicked = event.target;
   clicked.classList.add("hidden")
-  if(matches < maxMatches)
   if(!firstCardClicked){
     firstCardClicked = event.target;
     firstCardClasses = firstCardClicked.previousElementSibling.className;
@@ -31,18 +31,16 @@ function handleClick(event){
     secondCardClasses = secondCardClicked.previousElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
     attempts++;
-    console.log(attempts)
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
       matches++;
       gameCards.addEventListener("click", handleClick)
       if(matches === maxMatches){
-        var modal = document.getElementById("modal");
         modal.classList.remove("hidden")
         gameCards.addEventListener("click", handleClick)
       }
     }else{
-      setTimeout(removeHidden,1500)
+      setTimeout(removeHidden,0)
     }
     displayStats();
   }
@@ -50,18 +48,36 @@ function handleClick(event){
 
 var attempts = 0;
 var gamesPlayed = 0;
-var calculateAccuracy = 0
-
+var gamesPlayedDocument = document.getElementById("gamesPlayed");
+var attemptsPlayed = document.getElementById("gamesAttempts");
+var gamesAccuracy = document.getElementById("gamesAccuracy");
 
 function displayStats(){
-  var gamesPlayedDocument = document.getElementById("gamesPlayed");
-  gamesPlayedDocument.textContent = gamesPlayed;
-
-  var attemptsPlayed = document.getElementById("gamesAttempts");
   attemptsPlayed.textContent = attempts;
+  gamesAccuracy.textContent = calculateAccuracy(attempts,matches) + "%";
+}
 
-  calculateAccuracy = Math.trunc(100 * matches / attempts);
-  var gamesAccuracy = document.getElementById("gamesAccuracy");
-  return gamesAccuracy.textContent = calculateAccuracy + "%";
+function calculateAccuracy(attempts,matches){
+ if(attempts){
+    return Math.trunc(100* matches/attempts)
+ }else{return "0%";}
+}
+modal.addEventListener("click",resetGame)
 
+function resetGame(){
+  gamesAccuracy.textContent = "0%"
+  matches = 0;
+  attempts = 0;
+  gamesPlayed++
+  gamesPlayedDocument.textContent = gamesPlayed
+  resetCards();
+  modal.classList.add("hidden")
+}
+
+var allCards = document.querySelectorAll(".back-card")
+
+function resetCards(){
+  for(var cardIndex = 0; cardIndex < allCards.length; cardIndex++){
+    allCards[cardIndex].classList.remove("hidden")
+  }
 }
