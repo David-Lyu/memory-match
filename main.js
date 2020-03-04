@@ -7,6 +7,18 @@ function handleClick(event){
     return;
   }
   var clicked = event.target;
-  console.log(clicked)
   clicked.classList.add("hidden")
+
+  if(!firstCardClicked){
+    firstCardClicked = event.target;
+    console.log(firstCardClicked);
+  }else{
+    secondCardClicked = event.target;
+    console.log(secondCardClicked);
+  }
 }
+
+var firstCardClicked;
+var secondCardClicked;
+var firstCardClasses;
+var secondCardClasses;
