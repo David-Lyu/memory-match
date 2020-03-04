@@ -12,7 +12,6 @@ function removeHidden() {
   firstCardClicked.classList.remove("hidden")
   secondCardClicked.classList.remove("hidden")
   firstCardClicked = null;
-  secondCardClicked = null;
   gameCards.addEventListener("click", handleClick)
 }
 
@@ -34,7 +33,6 @@ function handleClick(event){
     gameCards.removeEventListener("click", handleClick);
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
-      secondCardClicked = null;
       matches++;
       if(matches === maxMatches){
         var modal = document.getElementById("modal");
