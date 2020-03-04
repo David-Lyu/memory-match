@@ -40,7 +40,7 @@ function handleClick(event){
         gameCards.addEventListener("click", handleClick)
       }
     }else{
-      setTimeout(removeHidden,0)
+      setTimeout(removeHidden,1500)
     }
     displayStats();
   }
@@ -84,7 +84,7 @@ function resetCards(){
 }
 
 var frontCards = document.querySelectorAll(".front-card");
-for (let i = frontCards.length — 1; i > 0; i--) {
+for (let i = frontCards.length - 1; i > 0; i--) {
   const j = Math.floor(Math.random() * i)
   const temp = frontCards[i]
   frontCards[i] = frontCards[j]
