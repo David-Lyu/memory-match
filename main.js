@@ -16,7 +16,6 @@ function removeHidden() {
   firstCardClicked = null;
   gameCards.addEventListener("click", handleClick)
 }
-
 function handleClick(event){
   if(event.target.className.indexOf("back-card") === -1){
     return;
@@ -73,6 +72,7 @@ function resetGame(){
   gamesPlayedDocument.textContent = gamesPlayed
   resetCards();
   modal.classList.add("hidden")
+  shuffle();
 }
 
 var allCards = document.querySelectorAll(".back-card")
@@ -84,9 +84,39 @@ function resetCards(){
 }
 
 var frontCards = document.querySelectorAll(".front-card");
-for (let i = frontCards.length - 1; i > 0; i--) {
-  const j = Math.floor(Math.random() * i)
-  const temp = frontCards[i]
-  frontCards[i] = frontCards[j]
-  frontCards[j] = temp
+var shuffleArray = [];
+var cardDiv = document.getElementsByClassName("back-card");
+
+function shuffle(){
+
+  for (var putInIndex = 0; putInIndex < frontCards.length; putInIndex++) {
+    if (gamesPlayed === 1) {
+      shuffleArray[putInIndex] = frontCards[putInIndex];
+      frontCards[putInIndex].remove();}
+    if (putInIndex != 0) {
+      var j = Math.floor(Math.random() * shuffleArray.length)
+      var temp = shuffleArray[putInIndex]
+      shuffleArray[putInIndex] = shuffleArray[j]
+      shuffleArray[j] = temp
+    }
+  }
+
+  for (var i = 0; i < shuffleArray.length; i++) {
+    cardDiv[i].before(shuffleArray[i]);
+  }
 }
+
+// for(var putInIndex = 0; putInIndex < frontCards.length; putInIndex++){
+//   shuffleArray[putInIndex] = frontCards[putInIndex].className;
+//   frontCards.className = "";
+// }
+// var cardDiv = document.getElementsByClassName("back-card");
+// for (var putBack = shuffleArray.length - 1; putBack > 0; putBack--) {
+//   var j = Math.floor(Math.random() * putBack)
+//   var temp = shuffleArray[putBack]
+//   shuffleArray[putBack] =shuffleArray[j]
+//   shuffleArray[j] = temp
+// }
+// for(var i = 0; i < shuffleArray.length; i++){
+//   cardDiv[putBack].previousElementSibling.className = shuffleArray[putBack]
+// }
