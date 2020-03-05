@@ -87,36 +87,20 @@ var frontCards = document.querySelectorAll(".front-card");
 var shuffleArray = [];
 var cardDiv = document.getElementsByClassName("back-card");
 
-function shuffle(){
 
+
+function shuffle() {
   for (var putInIndex = 0; putInIndex < frontCards.length; putInIndex++) {
-    if (gamesPlayed === 1) {
-      shuffleArray[putInIndex] = frontCards[putInIndex];
-      frontCards[putInIndex].remove();}
-    if (putInIndex != 0) {
-      var j = Math.floor(Math.random() * shuffleArray.length)
-      var temp = shuffleArray[putInIndex]
-      shuffleArray[putInIndex] = shuffleArray[j]
-      shuffleArray[j] = temp
-    }
+    shuffleArray[putInIndex] = frontCards[putInIndex].className;
+    frontCards.className = "";
   }
-
+  for (var putBack = shuffleArray.length - 1; putBack > 0; putBack--) {
+    var j = Math.floor(Math.random() * putBack)
+    var temp = shuffleArray[putBack]
+    shuffleArray[putBack] = shuffleArray[j]
+    shuffleArray[j] = temp
+  }
   for (var i = 0; i < shuffleArray.length; i++) {
-    cardDiv[i].before(shuffleArray[i]);
+    cardDiv[i].previousElementSibling.className = shuffleArray[i]
   }
 }
-
-// for(var putInIndex = 0; putInIndex < frontCards.length; putInIndex++){
-//   shuffleArray[putInIndex] = frontCards[putInIndex].className;
-//   frontCards.className = "";
-// }
-// var cardDiv = document.getElementsByClassName("back-card");
-// for (var putBack = shuffleArray.length - 1; putBack > 0; putBack--) {
-//   var j = Math.floor(Math.random() * putBack)
-//   var temp = shuffleArray[putBack]
-//   shuffleArray[putBack] =shuffleArray[j]
-//   shuffleArray[j] = temp
-// }
-// for(var i = 0; i < shuffleArray.length; i++){
-//   cardDiv[putBack].previousElementSibling.className = shuffleArray[putBack]
-// }
