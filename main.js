@@ -16,7 +16,6 @@ function removeHidden() {
   firstCardClicked = null;
   gameCards.addEventListener("click", handleClick)
 }
-
 function handleClick(event){
   if(event.target.className.indexOf("back-card") === -1){
     return;
@@ -40,7 +39,7 @@ function handleClick(event){
         gameCards.addEventListener("click", handleClick)
       }
     }else{
-      setTimeout(removeHidden,0)
+      setTimeout(removeHidden,1500)
     }
     displayStats();
   }
@@ -73,6 +72,7 @@ function resetGame(){
   gamesPlayedDocument.textContent = gamesPlayed
   resetCards();
   modal.classList.add("hidden")
+  shuffle();
 }
 
 var allCards = document.querySelectorAll(".back-card")
@@ -80,5 +80,27 @@ var allCards = document.querySelectorAll(".back-card")
 function resetCards(){
   for(var cardIndex = 0; cardIndex < allCards.length; cardIndex++){
     allCards[cardIndex].classList.remove("hidden")
+  }
+}
+
+var frontCards = document.querySelectorAll(".front-card");
+var shuffleArray = [];
+var cardDiv = document.getElementsByClassName("back-card");
+
+
+
+function shuffle() {
+  for (var putInIndex = 0; putInIndex < frontCards.length; putInIndex++) {
+    shuffleArray[putInIndex] = frontCards[putInIndex].className;
+    frontCards.className = "";
+  }
+  for (var putBack = shuffleArray.length - 1; putBack > 0; putBack--) {
+    var j = Math.floor(Math.random() * putBack)
+    var temp = shuffleArray[putBack]
+    shuffleArray[putBack] = shuffleArray[j]
+    shuffleArray[j] = temp
+  }
+  for (var i = 0; i < shuffleArray.length; i++) {
+    cardDiv[i].previousElementSibling.className = shuffleArray[i]
   }
 }
