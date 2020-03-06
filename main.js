@@ -1,3 +1,5 @@
+var startButton = document.getElementById("startGame")
+startButton.addEventListener("click",startGame)
 var divCards = document.querySelectorAll('.cards');
 var arrayFront = ["css-logo", "docker-logo", "github-logo", "html-logo", "js-logo",
   "mysql-logo", "node-logo", "php-logo", "react-logo"];
@@ -21,6 +23,7 @@ function startGame(){
       allCards = document.querySelectorAll(".back-card")
       return allCards;
     }, 1000)
+    startButton.classList.add("hidden")
 }
 
 
