@@ -1,17 +1,26 @@
 var divCards = document.querySelectorAll('.cards');
 var arrayFront = ["css-logo", "docker-logo", "github-logo", "html-logo", "js-logo",
   "mysql-logo", "node-logo", "php-logo", "react-logo"];
-for (var addCardIndex = 0; addCardIndex < divCards.length; addCardIndex++) {
-  var tempBack = document.createElement("div");
-  tempBack.classList.add("back-card");
-  var tempFront = document.createElement("div");
-  if (addCardIndex < arrayFront.length) {
-    tempFront.classList.add("front-card", arrayFront[addCardIndex])
-  } else {
-    tempFront.classList.add("front-card", arrayFront[addCardIndex - arrayFront.length])
+var allCards;
+function startGame(){
+  for (var addCardIndex = 0; addCardIndex < divCards.length; addCardIndex++) {
+    var tempFront = document.createElement("div");
+    if (addCardIndex < arrayFront.length) {
+      tempFront.classList.add("front-card", arrayFront[addCardIndex])
+    } else {
+      tempFront.classList.add("front-card", arrayFront[addCardIndex - arrayFront.length])
+    }
+    divCards[addCardIndex].appendChild(tempFront)
   }
-  divCards[addCardIndex].appendChild(tempFront)
-  divCards[addCardIndex].appendChild(tempBack)
+    setTimeout(function () {
+      for (var addBackCardIndex = 0; addBackCardIndex < divCards.length; addBackCardIndex++) {
+        var tempBack = document.createElement("div");
+        tempBack.classList.add("back-card");
+        divCards[addBackCardIndex].appendChild(tempBack)
+      }
+      allCards = document.querySelectorAll(".back-card")
+      return allCards;
+    }, 1000)
 }
 
 
@@ -25,6 +34,7 @@ var maxMatches = 9;
 var matches = 0;
 var modal = document.getElementById("modal");
 var modal2 = document.getElementById("modal2")
+var button = document.getElementsByClassName("button")
 
 
 function removeHidden() {
@@ -55,7 +65,7 @@ function handleClick(event){
       gameCards.addEventListener("click", handleClick)
       if(matches === maxMatches){
         modal.classList.remove("hidden")
-        gameCards.addEventListener("click", handleClick)
+        button[0].addEventListener("click",resetGame)
       }
     }else{
       setTimeout(removeHidden,1500)
@@ -80,7 +90,6 @@ function calculateAccuracy(attempts,matches){
     return Math.trunc(100* matches/attempts)
  }
 }
-modal.addEventListener("click",resetGame)
 
 function resetGame(){
   gamesAccuracy.textContent = "0%";
@@ -100,7 +109,7 @@ function resetGame(){
 }
 
 
-var allCards = document.querySelectorAll(".back-card")
+
 
 function resetCards(){
   for(var cardIndex = 0; cardIndex < allCards.length; cardIndex++){
@@ -132,9 +141,8 @@ function shuffle() {
 
 
 var maxAttempts = arrayFront.length + gamesPlayed;
-var button = document.getElementsByClassName("button")
 function gameOver(){
-  if(attempts >= maxAttempts){
+  if(attempts >= maxAttempts && matches != maxMatches){
     modal2.classList.remove("hidden");
     button[1].addEventListener("click",resetGame)
   }
