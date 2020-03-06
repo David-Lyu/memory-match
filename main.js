@@ -1,3 +1,5 @@
+//Start Game
+
 var startButton = document.getElementById("startGame")
 startButton.addEventListener("click",startGame)
 var divCards = document.querySelectorAll('.cards');
@@ -27,7 +29,7 @@ function startGame(){
   return twoCards;
 }
 
-
+//Click card effects
 var gameCards = document.getElementById("gameCards");
 gameCards.addEventListener("click", handleClick)
 var firstCardClicked;
@@ -78,6 +80,7 @@ function handleClick(event){
   }
 }
 
+//Display Stats
 var attempts = 0;
 var gamesPlayed = 0;
 var gamesPlayedDocument = document.getElementById("gamesPlayed");
@@ -95,6 +98,7 @@ function calculateAccuracy(attempts,matches){
  }
 }
 
+//Reset Game
 function resetGame(){
   gamesAccuracy.textContent = "0%";
   attemptsPlayed.textContent = "N/A";
@@ -122,10 +126,10 @@ function resetCards(){
   }
 }
 
+
+//Shuffle array
 var shuffleArray = [];
 var cardDiv = document.getElementsByClassName("back-card");
-
-
 
 function shuffle() {
   for (var putInIndex = 0; putInIndex < frontCards.length; putInIndex++) {
@@ -151,6 +155,7 @@ function gameOver(){
   }
 }
 
+//Shows front card
 function showBack() {
   for(var hideCardIndex = 0; hideCardIndex < backCards.length; hideCardIndex++ ){
     backCards[hideCardIndex].classList.add("hidden");
@@ -162,3 +167,9 @@ function showBack() {
   },1000)
 
 }
+
+
+//Create Timer
+
+var minutes = Math.floor(time/60);
+var seconds = time % 60;
