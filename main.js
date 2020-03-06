@@ -140,7 +140,7 @@ function shuffle() {
 }
 
 
-var maxAttempts = arrayFront.length + gamesPlayed;
+var maxAttempts = arrayFront.length //+ gamesPlayed; for dynamic addition of extra cards
 function gameOver(){
   if(attempts >= maxAttempts && matches != maxMatches){
     modal2.classList.remove("hidden");
