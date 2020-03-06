@@ -3,9 +3,13 @@ startButton.addEventListener("click",startGame)
 var divCards = document.querySelectorAll('.cards');
 var arrayFront = ["css-logo", "docker-logo", "github-logo", "html-logo", "js-logo",
   "mysql-logo", "node-logo", "php-logo", "react-logo"];
-var allCards;
+var backCards;
+var frontCards;
 function startGame(){
+  var twoCards = {frontCards,backCards}
   for (var addCardIndex = 0; addCardIndex < divCards.length; addCardIndex++) {
+    var tempBack = document.createElement("div");
+    tempBack.classList.add("back-card");
     var tempFront = document.createElement("div");
     if (addCardIndex < arrayFront.length) {
       tempFront.classList.add("front-card", arrayFront[addCardIndex])
@@ -13,17 +17,14 @@ function startGame(){
       tempFront.classList.add("front-card", arrayFront[addCardIndex - arrayFront.length])
     }
     divCards[addCardIndex].appendChild(tempFront)
+    divCards[addCardIndex].appendChild(tempBack)
   }
-    setTimeout(function () {
-      for (var addBackCardIndex = 0; addBackCardIndex < divCards.length; addBackCardIndex++) {
-        var tempBack = document.createElement("div");
-        tempBack.classList.add("back-card");
-        divCards[addBackCardIndex].appendChild(tempBack)
-      }
-      allCards = document.querySelectorAll(".back-card")
-      return allCards;
-    }, 1000)
-    startButton.classList.add("hidden")
+  startButton.classList.add("hidden")
+  backCards = document.querySelectorAll(".back-card");
+  frontCards = document.querySelectorAll(".front-card");
+  shuffle();
+  showBack();
+  return twoCards;
 }
 
 
@@ -109,18 +110,18 @@ function resetGame(){
     modal2.classList.add("hidden");
   }
   shuffle();
+  showBack();
 }
 
 
 
 
 function resetCards(){
-  for(var cardIndex = 0; cardIndex < allCards.length; cardIndex++){
-    allCards[cardIndex].classList.remove("hidden")
+  for(var cardIndex = 0; cardIndex < backCards.length; cardIndex++){
+    backCards[cardIndex].classList.remove("hidden")
   }
 }
 
-var frontCards = document.querySelectorAll(".front-card");
 var shuffleArray = [];
 var cardDiv = document.getElementsByClassName("back-card");
 
@@ -142,11 +143,22 @@ function shuffle() {
   }
 }
 
-
-var maxAttempts = arrayFront.length //+ gamesPlayed; for dynamic addition of extra cards
+var maxAttempts = arrayFront.length + 4//+ gamesPlayed; for dynamic addition of extra cards
 function gameOver(){
-  if(attempts >= maxAttempts && matches != maxMatches){
+  if(attempts === maxAttempts && matches != maxMatches){
     modal2.classList.remove("hidden");
     button[1].addEventListener("click",resetGame)
   }
+}
+
+function showBack() {
+  for(var hideCardIndex = 0; hideCardIndex < backCards.length; hideCardIndex++ ){
+    backCards[hideCardIndex].classList.add("hidden");
+  }
+  setTimeout(function(){
+    for(var hideCardInner = 0; hideCardInner < backCards.length; hideCardInner++){
+      backCards[hideCardInner].classList.remove("hidden");
+    }
+  },1000)
+
 }
