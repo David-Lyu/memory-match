@@ -1,3 +1,19 @@
+var divCards = document.querySelectorAll('.cards');
+var arrayFront = ["css-logo", "docker-logo", "github-logo", "html-logo", "js-logo",
+  "mysql-logo", "node-logo", "php-logo", "react-logo"];
+for (var addCardIndex = 0; addCardIndex < divCards.length; addCardIndex++) {
+  var tempBack = document.createElement("div");
+  tempBack.classList.add("back-card");
+  var tempFront = document.createElement("div");
+  if (addCardIndex < arrayFront.length) {
+    tempFront.classList.add("front-card", arrayFront[addCardIndex])
+  } else {
+    tempFront.classList.add("front-card", arrayFront[addCardIndex - arrayFront.length])
+  }
+  divCards[addCardIndex].appendChild(tempFront)
+  divCards[addCardIndex].appendChild(tempBack)
+}
+
 
 var gameCards = document.getElementById("gameCards");
 gameCards.addEventListener("click", handleClick)
@@ -17,6 +33,7 @@ function removeHidden() {
   firstCardClicked = null;
   gameCards.addEventListener("click", handleClick)
 }
+
 function handleClick(event){
   if(event.target.className.indexOf("back-card") === -1){
     return;
@@ -31,6 +48,7 @@ function handleClick(event){
     secondCardClasses = secondCardClicked.previousElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
     attempts++;
+    gameOver();
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
       matches++;
@@ -75,7 +93,7 @@ function resetGame(){
   if (modal.className.indexOf("hidden") === -1){
     modal.classList.add("hidden");
   }
-  if(modal2.className.indexOf === -1){
+  if(modal2.className.indexOf("hidden") === -1){
     modal2.classList.add("hidden");
   }
   shuffle();
@@ -109,5 +127,15 @@ function shuffle() {
   }
   for (var i = 0; i < shuffleArray.length; i++) {
     cardDiv[i].previousElementSibling.className = shuffleArray[i]
+  }
+}
+
+
+var maxAttempts = arrayFront.length + gamesPlayed;
+var button = document.getElementsByClassName("button")
+function gameOver(){
+  if(attempts >= maxAttempts){
+    modal2.classList.remove("hidden");
+    button[1].addEventListener("click",resetGame)
   }
 }
