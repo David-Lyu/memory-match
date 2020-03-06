@@ -6,10 +6,15 @@
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: portrait) {
 
+    .background-img {
+      height: auto;
+    }
+
     .second-row {
       flex-direction: column;
       flex-wrap: wrap;
     }
+
     aside.row{
       width: 100%;
       flex-direction: row;
@@ -20,6 +25,7 @@
       font-size: 10px;
       height: 25px;
     }
+
     aside.row h4 {
       margin: 0;
       height: 100%;
@@ -48,19 +54,26 @@
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
 
+    .container {
+      height: auto;
+    }
+
     .second-row {
       flex-direction: column;
       flex-wrap: wrap;
     }
+
     aside.row{
       width: 100%;
       flex-direction: row;
     }
+
     aside.row > * {
       width: 8%;
       font-size: 10px;
       border: black 0.1px solid;
     }
+
     aside.row h4 {
       margin: 0;
       height: 100%;

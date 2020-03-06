@@ -3,6 +3,11 @@
   background-image: url(assets/images/lfz-background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  height: 97vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .first-row {
