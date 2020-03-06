@@ -8,6 +8,7 @@ var secondCardClasses;
 var maxMatches = 9;
 var matches = 0;
 var modal = document.getElementById("modal");
+var modal2 = document.getElementById("modal2")
 
 
 function removeHidden() {
@@ -71,9 +72,15 @@ function resetGame(){
   gamesPlayed++
   gamesPlayedDocument.textContent = gamesPlayed
   resetCards();
-  modal.classList.add("hidden")
+  if (modal.className.indexOf("hidden") === -1){
+    modal.classList.add("hidden");
+  }
+  if(modal2.className.indexOf === -1){
+    modal2.classList.add("hidden");
+  }
   shuffle();
 }
+
 
 var allCards = document.querySelectorAll(".back-card")
 
