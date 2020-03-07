@@ -24,6 +24,7 @@ function startGame(){
   startButton.classList.add("hidden")
   backCards = document.querySelectorAll(".back-card");
   frontCards = document.querySelectorAll(".front-card");
+  setTimer();
   shuffle();
   showBack();
   return twoCards;
@@ -64,7 +65,9 @@ function handleClick(event){
     secondCardClasses = secondCardClicked.previousElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
     attempts++;
-    gameOver();
+    if (attempts === maxAttempts && matches != maxMatches){
+      gameOver();
+    }
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
       matches++;
@@ -113,6 +116,7 @@ function resetGame(){
   if(modal2.className.indexOf("hidden") === -1){
     modal2.classList.add("hidden");
   }
+  setTimer();
   shuffle();
   showBack();
 }
@@ -149,10 +153,8 @@ function shuffle() {
 
 var maxAttempts = arrayFront.length + 4//+ gamesPlayed; for dynamic addition of extra cards
 function gameOver(){
-  if(attempts === maxAttempts && matches != maxMatches){
-    modal2.classList.remove("hidden");
-    button[1].addEventListener("click",resetGame)
-  }
+  modal2.classList.remove("hidden");
+  button[1].addEventListener("click",resetGame)
 }
 
 //Shows front card
@@ -170,6 +172,31 @@ function showBack() {
 
 
 //Create Timer
+function timer(time){
+  var minutes = Math.floor(time/60);
+  if(time > 60){
+    var seconds = time % 60;
+  }else{
+    if(time < 10){
+      seconds = "0" + time;
+    }else{
+      seconds = time;
+    }
+  }
+  return minutes + ":" + seconds;
+}
 
-var minutes = Math.floor(time/60);
-var seconds = time % 60;
+var time_limit = 200;
+
+function setTimer(){
+  var timerInterval = setInterval(function(){
+    time_limit--;
+    var timeDiv = document.getElementById("timer")
+    timeDiv.textContent = timer(time_limit);
+    if(time_limit === 0){
+      clearInterval(timerInterval);
+      gameOver();
+      return time_limit = 200;
+    }
+  },1000)
+}
