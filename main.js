@@ -56,7 +56,7 @@ function handleClick(event){
     return;
   }
   var clicked = event.target;
-  clicked.classList.add("hidden")
+  clicked.classList.add("flip-cards")
   if(!firstCardClicked){
     firstCardClicked = event.target;
     firstCardClasses = firstCardClicked.previousElementSibling.className;

@@ -86,8 +86,13 @@ main {
 .cards {
   height: 30%;
   position: relative;
+  transform: rotateY(180deg);
+  transition:transform 0.6s;
+  transform-style: preserve-3d;
 }
-
+.flip-cards {
+  transform: rotateY(180deg)
+}
 .front-card, .back-card {
   width: 90%;
   height: 100%;
@@ -95,10 +100,13 @@ main {
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .back-card{
   background-image: url(assets/images/lfz-card.jpg);
+  transform: rotateY(180deg);
 }
 
 .css-logo{
