@@ -197,7 +197,9 @@ function setTimer(){
     timeDiv.textContent = timer(time_limit);
     if(time_limit === 0 || attempts === maxAttempts || matches===maxAttempts){
       clearInterval(timerInterval);
+      if(time_limit === 0){
       gameOver();
+      }
       return time_limit = 130;
     }
   },1000)
