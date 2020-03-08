@@ -64,8 +64,7 @@ function handleClick(event){
     secondCardClicked = event.target;
     secondCardClasses = secondCardClicked.previousElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
-    attempts++;
-    if (attempts === maxAttempts && matches != maxMatches){
+    if (attempts === maxAttempts && matches != maxMatches ){
       gameOver();
     }
     if(firstCardClasses === secondCardClasses){
@@ -79,6 +78,7 @@ function handleClick(event){
     }else{
       setTimeout(removeHidden,1500)
     }
+    attempts++;
     displayStats();
   }
 }
@@ -195,7 +195,7 @@ function setTimer(){
     time_limit--;
     var timeDiv = document.getElementById("timer")
     timeDiv.textContent = timer(time_limit);
-    if(time_limit === 0 || attempts === maxAttempts){
+    if(time_limit === 0 || attempts === maxAttempts || matches===maxAttempts){
       clearInterval(timerInterval);
       gameOver();
       return time_limit = 130;
