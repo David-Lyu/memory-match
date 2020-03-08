@@ -91,7 +91,8 @@ main {
   transform-style: preserve-3d;
 }
 .flip-cards {
-  transform: rotateY(0)
+  transform: rotateY(0);
+  transform: translateX(10%);
 }
 .front-card, .back-card {
   width: 90%;
