@@ -45,8 +45,8 @@ var button = document.getElementsByClassName("button")
 
 
 function removeHidden() {
-  firstCardClicked.classList.remove("hidden")
-  secondCardClicked.classList.remove("hidden")
+  firstCardClicked.parentElement.classList.remove("flip-cards")
+  secondCardClicked.parentElement.classList.remove("flip-cards")
   firstCardClicked = null;
   gameCards.addEventListener("click", handleClick)
 }
@@ -56,7 +56,7 @@ function handleClick(event){
     return;
   }
   var clicked = event.target;
-  clicked.classList.add("flip-cards")
+  clicked.parentElement.classList.add("flip-cards")
   if(!firstCardClicked){
     firstCardClicked = event.target;
     firstCardClasses = firstCardClicked.previousElementSibling.className;
@@ -126,7 +126,7 @@ function resetGame(){
 
 function resetCards(){
   for(var cardIndex = 0; cardIndex < backCards.length; cardIndex++){
-    backCards[cardIndex].classList.remove("hidden")
+    divCards[cardIndex].classList.remove("flip-cards")
   }
 }
 
@@ -160,13 +160,15 @@ function gameOver(){
 //Shows front card
 function showBack() {
   for(var hideCardIndex = 0; hideCardIndex < backCards.length; hideCardIndex++ ){
-    backCards[hideCardIndex].classList.add("hidden");
+    frontCards[hideCardIndex].classList.add("front-card-show");
+    backCards[hideCardIndex].classList.add("hidden")
   }
   setTimeout(function(){
     for(var hideCardInner = 0; hideCardInner < backCards.length; hideCardInner++){
       backCards[hideCardInner].classList.remove("hidden");
+      frontCards[hideCardInner].classList.remove("front-card-show")
     }
-  },1000)
+  },1500)
 
 }
 
@@ -193,7 +195,7 @@ function setTimer(){
     time_limit--;
     var timeDiv = document.getElementById("timer")
     timeDiv.textContent = timer(time_limit);
-    if(time_limit === 0){
+    if(time_limit === 0 || attempts === maxAttempts){
       clearInterval(timerInterval);
       gameOver();
       return time_limit = 130;
