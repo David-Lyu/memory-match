@@ -174,11 +174,11 @@ function showBack() {
 //Create Timer
 function timer(time){
   var minutes = Math.floor(time/60);
-  if(time > 60){
+  if(time % 60 > 10){
     var seconds = time % 60;
   }else{
-    if(time < 10){
-      seconds = "0" + time;
+    if(time % 60 < 10){
+      seconds = "0" + (time % 60);
     }else{
       seconds = time;
     }
@@ -186,7 +186,7 @@ function timer(time){
   return minutes + ":" + seconds;
 }
 
-var time_limit = 200;
+var time_limit = 130;
 
 function setTimer(){
   var timerInterval = setInterval(function(){
@@ -196,7 +196,7 @@ function setTimer(){
     if(time_limit === 0){
       clearInterval(timerInterval);
       gameOver();
-      return time_limit = 200;
+      return time_limit = 130;
     }
   },1000)
 }
