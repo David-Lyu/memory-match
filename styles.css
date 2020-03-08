@@ -1,6 +1,5 @@
 
 .modal {
-  background-color: black;
   position: fixed;
   display:flex;
   align-items: center;
@@ -8,18 +7,28 @@
   width:100%;
   height: 100vh;
   z-index: 1;
-  opacity: 0.8;
 }
 
 .inner-modal {
-  background-color: deeppink;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 50%;
-  height: 25%;
+  height: 50%;
+  opacity: 1;
 }
 
+.modal-1 {
+  background-image:url(cards/winner.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.modal-2 {
+  background-image: url(cards/Lose.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 .start-game {
   color:white;
   position:fixed;
@@ -114,39 +123,39 @@ main {
 }
 
 .css-logo{
-  background-image: url(assets/images/css-logo.png);
+  background-image: url(cards/bunny.jpg);
 }
 
 .docker-logo{
-  background-image: url(assets/images/docker-logo.jpg);
+  background-image: url(cards/frenchie\ taunt.jpg);
 }
 
 .github-logo{
-  background-image: url(assets/images/gitHub-logo.png);
+  background-image: url(cards/holyhandgrenade189.jpg);
 }
 
 .html-logo{
-  background-image: url(assets/images/html-logo.png);
+  background-image: url(cards/lancelot.jpg);
 }
 
 .js-logo{
-  background-image: url(assets/images/js-logo.png);
+  background-image: url(cards/monster.jpg);
 }
 
 .mysql-logo{
-  background-image: url(assets/images/mysql-logo.jpg);
+  background-image: url(cards/Ni.jpg);
 }
 
 .node-logo{
-  background-image: url(assets/images/node-logo.png);
+  background-image: url(cards/sir\ robin.jpg);
 }
 
 .php-logo{
-  background-image: url(assets/images/php-logo.jpeg);
+  background-image: url(cards/small-grail-620x369.jpg);
 }
 
 .react-logo{
-  background-image: url(assets/images/react-logo.png);
+  background-image: url(cards/trojan.jpg);
 }
 
 .hidden {
