@@ -31,7 +31,7 @@
 }
 
 .background-img {
-  background-image: url(assets/images/lfz-background.jpg);
+  background-image: url(cards/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 97vh;
@@ -105,7 +105,7 @@ main {
 }
 
 .back-card{
-  background-image: url(assets/images/lfz-card.jpg);
+  background-image: url(cards/backcard.png);
   transform: rotateY(180deg);
 }
 
