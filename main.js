@@ -48,6 +48,7 @@ function removeHidden() {
   firstCardClicked.parentElement.classList.remove("flip-cards")
   secondCardClicked.parentElement.classList.remove("flip-cards")
   firstCardClicked = null;
+  secondCardClicked = null;
   gameCards.addEventListener("click", handleClick)
 }
 
@@ -59,9 +60,11 @@ function handleClick(event){
   clicked.parentElement.classList.add("flip-cards")
   if(!firstCardClicked){
     firstCardClicked = event.target;
+    console.log("The first card",firstCardClicked)
     firstCardClasses = firstCardClicked.previousElementSibling.className;
-  }else{
+  }else if (firstCardClicked != event.target){
     secondCardClicked = event.target;
+    console.log("The second card",secondCardClicked)
     secondCardClasses = secondCardClicked.previousElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
     if (attempts === maxAttempts && matches != maxMatches ){
@@ -69,12 +72,13 @@ function handleClick(event){
     }
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
+      secondCardClicked = null;
       matches++;
-      gameCards.addEventListener("click", handleClick)
       if(matches === maxMatches){
         modal.classList.remove("hidden")
         button[0].addEventListener("click",resetGame)
       }
+      setTimeout(function(){gameCards.addEventListener("click", handleClick)},1500);
     }else{
       setTimeout(removeHidden,1500)
     }
