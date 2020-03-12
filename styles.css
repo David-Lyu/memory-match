@@ -72,11 +72,13 @@ aside {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  background-image: url(cards/page.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 aside > div {
   flex-basis: 60%;
-  background-color: lightblue;
   margin-bottom: 2%;
 }
 

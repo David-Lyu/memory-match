@@ -78,7 +78,7 @@ function handleClick(event){
         modal.classList.remove("hidden")
         button[0].addEventListener("click",resetGame)
       }
-      setTimeout(function(){gameCards.addEventListener("click", handleClick)},1500);
+      setTimeout(function(){gameCards.addEventListener("click", handleClick)},100);
     }else{
       setTimeout(removeHidden,1500)
     }
