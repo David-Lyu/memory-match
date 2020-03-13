@@ -24,6 +24,7 @@ function startGame(){
   startButton.classList.add("hidden")
   backCards = document.querySelectorAll(".back-card");
   frontCards = document.querySelectorAll(".front-card");
+  clearInterval(startModalBackground);
   setTimer();
   shuffle();
   showBack();
@@ -207,4 +208,28 @@ function setTimer(){
       return time_limit = 130;
     }
   },1000)
+}
+
+var rainbowChange;
+var colorIndexArray = ["red","orange","yellow","green","blue","indigo","violet"]
+function changeBackgroundColor (){
+  var startModalBackground = document.getElementById("startGame");
+  rainbowChange = setInterval(()=>{
+    var backColorIndex = 0;
+    var colorIndex = colorIndexArray.length - 1;
+      startModalBackground.style.backgroundColor = colorIndexArray[colorIndex];
+      startModalBackground.style.color = colorIndexArray[colorIndex];
+      if(backColorIndex < colorIndexArray.length - 1){
+        backColorIndex++;
+      }else {
+        backColorIndex = 0;
+      }
+      if(colorIndex >= 0){
+        colorIndex--;
+      }else{
+        colorIndex = colorIndexArray.length -1
+      }
+    console.log("try how many times")
+  }, 1000)
+return rainbowChange;
 }
