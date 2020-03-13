@@ -1,13 +1,14 @@
 //Start Game
 
 var startButton = document.getElementById("startGame")
-startButton.addEventListener("click",startGame)
+startButton.children[0].addEventListener("click",startGame)
 var divCards = document.querySelectorAll('.cards');
 var arrayFront = ["css-logo", "docker-logo", "github-logo", "html-logo", "js-logo",
   "mysql-logo", "node-logo", "php-logo", "react-logo"];
 var backCards;
 var frontCards;
 function startGame(){
+  clearInterval(rainbowChange);
   var twoCards = {frontCards,backCards}
   for (var addCardIndex = 0; addCardIndex < divCards.length; addCardIndex++) {
     var tempBack = document.createElement("div");
@@ -24,7 +25,6 @@ function startGame(){
   startButton.classList.add("hidden")
   backCards = document.querySelectorAll(".back-card");
   frontCards = document.querySelectorAll(".front-card");
-  clearInterval(startModalBackground);
   setTimer();
   shuffle();
   showBack();
@@ -214,8 +214,10 @@ var rainbowChange;
 var colorIndexArray = ["red","orange","yellow","green","blue","indigo","violet"]
 var backColorIndex = 0;
 var colorIndex = colorIndexArray.length - 1;
+var llamaMode = document.getElementById("llamaMode");
+llamaMode.addEventListener("click",changeBackgroundColor);
+var startModalBackground = document.getElementById("startGame");
 function changeBackgroundColor (){
-  var startModalBackground = document.getElementById("startGame");
   rainbowChange = setInterval(()=>{
 
       startModalBackground.style.backgroundColor = colorIndexArray[backColorIndex];
