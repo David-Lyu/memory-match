@@ -212,12 +212,13 @@ function setTimer(){
 
 var rainbowChange;
 var colorIndexArray = ["red","orange","yellow","green","blue","indigo","violet"]
+var backColorIndex = 0;
+var colorIndex = colorIndexArray.length - 1;
 function changeBackgroundColor (){
   var startModalBackground = document.getElementById("startGame");
   rainbowChange = setInterval(()=>{
-    var backColorIndex = 0;
-    var colorIndex = colorIndexArray.length - 1;
-      startModalBackground.style.backgroundColor = colorIndexArray[colorIndex];
+
+      startModalBackground.style.backgroundColor = colorIndexArray[backColorIndex];
       startModalBackground.style.color = colorIndexArray[colorIndex];
       if(backColorIndex < colorIndexArray.length - 1){
         backColorIndex++;
@@ -229,7 +230,7 @@ function changeBackgroundColor (){
       }else{
         colorIndex = colorIndexArray.length -1
       }
-    console.log("try how many times")
-  }, 1000)
+    console.log(startModalBackground.style,backColorIndex,colorIndex)
+  }, 100)
 return rainbowChange;
 }
