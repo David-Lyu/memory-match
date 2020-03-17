@@ -68,9 +68,7 @@ function handleClick(event){
     console.log("The second card",secondCardClicked)
     secondCardClasses = secondCardClicked.previousElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
-    if (attempts === maxAttempts && matches != maxMatches ){
-      gameOver();
-    }
+
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
       secondCardClicked = null;
@@ -82,6 +80,9 @@ function handleClick(event){
       setTimeout(function(){gameCards.addEventListener("click", handleClick)},100);
     }else{
       setTimeout(removeHidden,1500)
+    }
+    if (attempts === maxAttempts && matches != maxMatches) {
+      gameOver();
     }
     attempts++;
     displayStats();
@@ -200,7 +201,7 @@ function setTimer(){
     time_limit--;
     var timeDiv = document.getElementById("timer")
     timeDiv.textContent = timer(time_limit);
-    if(time_limit === 0 || attempts === maxAttempts || matches===maxAttempts){
+    if(time_limit === 0 || attempts === maxAttempts || matches === maxMatches){
       clearInterval(timerInterval);
       if(time_limit === 0){
       gameOver();
@@ -234,5 +235,6 @@ function changeBackgroundColor (){
       }
     console.log(startModalBackground.style,backColorIndex,colorIndex)
   }, 100)
-return rainbowChange;
+  llamaMode.removeEventListener("click", changeBackgroundColor)
+  return rainbowChange;
 }
