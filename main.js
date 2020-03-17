@@ -1,13 +1,14 @@
 //Start Game
 
 var startButton = document.getElementById("startGame")
-startButton.addEventListener("click",startGame)
+startButton.children[0].addEventListener("click",startGame)
 var divCards = document.querySelectorAll('.cards');
 var arrayFront = ["css-logo", "docker-logo", "github-logo", "html-logo", "js-logo",
   "mysql-logo", "node-logo", "php-logo", "react-logo"];
 var backCards;
 var frontCards;
 function startGame(){
+  clearInterval(rainbowChange);
   var twoCards = {frontCards,backCards}
   for (var addCardIndex = 0; addCardIndex < divCards.length; addCardIndex++) {
     var tempBack = document.createElement("div");
@@ -67,9 +68,7 @@ function handleClick(event){
     console.log("The second card",secondCardClicked)
     secondCardClasses = secondCardClicked.previousElementSibling.className;
     gameCards.removeEventListener("click", handleClick);
-    if (attempts === maxAttempts && matches != maxMatches ){
-      gameOver();
-    }
+
     if(firstCardClasses === secondCardClasses){
       firstCardClicked = null;
       secondCardClicked = null;
@@ -81,6 +80,9 @@ function handleClick(event){
       setTimeout(function(){gameCards.addEventListener("click", handleClick)},100);
     }else{
       setTimeout(removeHidden,1500)
+    }
+    if (attempts === maxAttempts && matches != maxMatches) {
+      gameOver();
     }
     attempts++;
     displayStats();
@@ -199,7 +201,7 @@ function setTimer(){
     time_limit--;
     var timeDiv = document.getElementById("timer")
     timeDiv.textContent = timer(time_limit);
-    if(time_limit === 0 || attempts === maxAttempts || matches===maxAttempts){
+    if(time_limit === 0 || attempts === maxAttempts || matches === maxMatches){
       clearInterval(timerInterval);
       if(time_limit === 0){
       gameOver();
@@ -207,4 +209,32 @@ function setTimer(){
       return time_limit = 130;
     }
   },1000)
+}
+
+var rainbowChange;
+var colorIndexArray = ["red","orange","yellow","green","blue","indigo","violet"]
+var backColorIndex = 0;
+var colorIndex = colorIndexArray.length - 1;
+var llamaMode = document.getElementById("llamaMode");
+llamaMode.addEventListener("click",changeBackgroundColor);
+var startModalBackground = document.getElementById("startGame");
+function changeBackgroundColor (){
+  rainbowChange = setInterval(()=>{
+
+      startModalBackground.style.backgroundColor = colorIndexArray[backColorIndex];
+      startModalBackground.style.color = colorIndexArray[colorIndex];
+      if(backColorIndex < colorIndexArray.length - 1){
+        backColorIndex++;
+      }else {
+        backColorIndex = 0;
+      }
+      if(colorIndex >= 0){
+        colorIndex--;
+      }else{
+        colorIndex = colorIndexArray.length -1
+      }
+    console.log(startModalBackground.style,backColorIndex,colorIndex)
+  }, 100)
+  llamaMode.removeEventListener("click", changeBackgroundColor)
+  return rainbowChange;
 }
