@@ -17,4 +17,5 @@ Sample Image below:
 1. Clone the repository
 
     git clone https://github.com/david-lyu/memory-match
+
     cd memory-match
